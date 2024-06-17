@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SaveUp.LoginApp.LoginAppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SaveUp.LoginApp"
+    xmlns:views="clr-namespace:SaveUp.LoginApp.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="Login" />
+
+    <ShellContent
+        ContentTemplate="{DataTemplate views:RegisterPage}"
+        Route="Register" />
+
+    <ShellContent
+        ContentTemplate="{DataTemplate views:PasswordResetPage}"
+        Route="PasswordReset" />
+
+</Shell>

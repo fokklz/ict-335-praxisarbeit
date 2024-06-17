@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SaveUp.LoginApp.Views.RegisterPage">
+    
+    <VerticalStackLayout VerticalOptions="Center" Margin="0,0,0,200">
+        <!-- Register Heading -->
+        <Label
+        Text="Register"
+        Margin="15,0,15,20"
+        FontAttributes="Bold"
+        FontSize="34"/>
+
+        <VerticalStackLayout Padding="12,0">
+            <!-- Register Form -->
+
+            <!-- Username -->
+            <VerticalStackLayout
+            Margin="0,0,0,10">
+                <Label 
+                Text="Username"
+                FontSize="18"
+                Margin="3,0"/>
+                <Entry 
+                Text="{Binding Username, Mode=TwoWay}"/>
+            </VerticalStackLayout>
+            <!-- Email -->
+            <VerticalStackLayout
+            Margin="0,0,0,10">
+                <Label 
+                Text="Email"
+                FontSize="18"
+                Margin="3,0"/>
+                <Entry 
+                Keyboard="Email"
+                Text="{Binding Email, Mode=TwoWay}"/>
+            </VerticalStackLayout>
+
+            <!-- Password -->
+            <VerticalStackLayout
+            Margin="0,0,0,25">
+                <Label 
+                Text="Password"
+                FontSize="18"
+                Margin="3,0"/>
+                <Entry
+                IsPassword="True"
+                Text="{Binding Password, Mode=TwoWay}" />
+            </VerticalStackLayout>
+
+            <!-- Password -->
+            <VerticalStackLayout
+                Margin="0,0,0,25">
+                <Label 
+                    Text="Confirm Password"
+                    FontSize="18"
+                    Margin="3,0"/>
+                <Entry
+                    IsPassword="True"
+                    Text="{Binding ConfirmPassword, Mode=TwoWay}" />
+            </VerticalStackLayout>
+
+            <!-- Register Button and Navigation to Login -->
+            <VerticalStackLayout>
+                <Label
+                    Text="By Registering you accept out Terms of Service"
+                    FontSize="13"
+                    Margin="3,0,0,10"/>
+                <Button 
+                Text="Register"
+                Margin="3,0"
+                Style="{StaticResource CallToActionButtonStyle}"/>
+                <Label 
+                Text="Back to Login"
+                HorizontalOptions="End"
+                Style="{StaticResource LinkLabelStyle}"
+                Padding="0,6,0,0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GotoLogin}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+
+</ContentPage>
