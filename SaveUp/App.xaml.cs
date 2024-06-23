@@ -11,7 +11,7 @@ namespace SaveUp
 
         public static String VERSION = "1.0.0";
 
-        public static IServiceProvider ServiceProvider { get; private set; }
+        public static IServiceProvider ServiceProvider { get; set; }
 
         public AppShell MainAppShell { get; private set; }
 

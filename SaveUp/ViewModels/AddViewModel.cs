@@ -82,10 +82,6 @@ namespace SaveUp.ViewModels
             var response = await _itemAPIService.CreateAsync(item);
             if (response.IsSuccess)
             {
-                // reload list
-                var homeViewModel = App.ServiceProvider.GetService<HomeViewModel>()!;
-                homeViewModel.LoadItems();
-
                 // clear fields for next item
                 Reset();
                 await _alertService.ShowAsync(Localization.Instance.Dialog_CreatedItem_Title, Localization.Instance.Dialog_CreatedItem_Message);

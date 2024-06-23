@@ -110,8 +110,11 @@ namespace SaveUp
                         var storageService = App.ServiceProvider.GetService<IStorageService>();
                         var authService = App.ServiceProvider.GetService<IAuthService>();
 
-                        storageService.InitializeAsync().Wait();
-                        authService.TryLoginFromStorage().Wait();
+                        storageService.InitializeAsync();
+                        authService.TryLoginFromStorage();
+
+                        return true;
+
                     });
 
                     ios.WillEnterForeground(app => {

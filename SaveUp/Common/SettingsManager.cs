@@ -47,13 +47,33 @@ namespace SaveUp.Common
             Debug.WriteLine("SettingsManager: Settings loaded");
         }
 
+        private static void TryDispatch(Action action)
+        {
+            var app = Application.Current;
+            if (app == null)
+            {
+                action();
+                return;
+            }
+
+            try
+            {
+                app.Dispatcher.Dispatch(action);
+            }
+            catch (Exception e)
+            {
+                // try without dispatcher
+                action();
+            }
+        }
+
         /// <summary>
         /// Set the language setting for the current logged in user
         /// </summary>
         /// <param name="language">The language to set, should be contained in the languageMap in Localization</param>
         public static void SetLanguage(string language)
         {
-            Application.Current?.Dispatcher.Dispatch(() =>
+            TryDispatch(() =>
             {
                 Language = language;
                 PreferencesAPI.Set($"{SettingsKey.Language}.{AuthManager.UserId}", Language);
@@ -69,7 +89,7 @@ namespace SaveUp.Common
         /// <param name="theme">The theme to set, should match the common english Names (Dark, Light, System)</param>
         public static void SetTheme(string theme)
         {
-            Application.Current?.Dispatcher.Dispatch(() =>
+            TryDispatch(() =>
             {
                 Theme = theme;
                 PreferencesAPI.Set($"{SettingsKey.Theme}.{AuthManager.UserId}", Theme);
@@ -85,7 +105,7 @@ namespace SaveUp.Common
         /// <param name="currency">The currency to set, should be a valid currency code</param>
         public static void SetCurrency(string currency)
         {
-            Application.Current?.Dispatcher.Dispatch(() =>
+            TryDispatch(() =>
             {
                 Currency = currency;
                 PreferencesAPI.Set($"{SettingsKey.Currency}.{AuthManager.UserId}", Currency);
@@ -99,7 +119,7 @@ namespace SaveUp.Common
         /// </summary>
         public static void SetTimeSpan()
         {
-            Application.Current?.Dispatcher.Dispatch(() =>
+            TryDispatch(() =>
             {
                 TimeSpan = DateTime.Now;
                 PreferencesAPI.Set($"{SettingsKey.TimeSpan}.{AuthManager.UserId}", TimeSpan);
@@ -124,7 +144,7 @@ namespace SaveUp.Common
         /// </summary>
         public static void ApplyTheme()
         {
-            Application.Current?.Dispatcher.Dispatch(() =>
+            TryDispatch(() =>
             {
                 var app = Application.Current;
                 if (app != null)

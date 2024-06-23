@@ -46,6 +46,11 @@ namespace SaveUp.Services
 
                     AuthManager.Login(parsed.Auth.Token, refreshToken, parsed.Id);
 
+                    if (!SettingsManager.HasTimeSpan())
+                    {
+                        SettingsManager.SetTimeSpan();
+                    }
+
                     return res;
                 }
             }

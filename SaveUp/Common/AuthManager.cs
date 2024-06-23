@@ -47,13 +47,6 @@ namespace SaveUp.Common
             Token = token;
             UserId = userId;
             IsLoggedIn = true;
-            
-            // Set the timespan if it is not set when the app is first launched after login
-            if (!SettingsManager.HasTimeSpan())
-            {
-                SettingsManager.SetTimeSpan();
-            }
-
             LoginChanged?.Invoke(null, new LoginChangedEventArgs(token, userId));
         }
 

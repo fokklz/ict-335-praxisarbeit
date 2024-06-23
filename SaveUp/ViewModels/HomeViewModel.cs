@@ -48,7 +48,11 @@ namespace SaveUp.ViewModels
                         homeDetailViewModel.TimeSpan = parsedDate;
                     }
 
-                    App.Current?.MainPage?.Navigation.PushAsync(homeDetail);
+                    var mainPage = Application.Current?.MainPage;
+                    if (mainPage != null && mainPage.Navigation != null)
+                    {
+                        mainPage.Navigation.PushAsync(homeDetail);
+                    }
                 }
             }
         }

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaveUp", "SaveUp\SaveUp.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaveUpBackend", "SaveUpBackend\SaveUpBackend.csproj", "{E9EC55ED-A613-44D5-B37B-8E9A3BD301DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveUpModels", "SaveUpModels\SaveUpModels.csproj", "{9BF4F362-608B-43C2-8086-228ED6D78B0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaveUpModels", "SaveUpModels\SaveUpModels.csproj", "{9BF4F362-608B-43C2-8086-228ED6D78B0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveUp.Tests", "SaveUp.Tests\SaveUp.Tests.csproj", "{7F8018F1-B91D-4866-8EAA-093D2F8B14C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{9BF4F362-608B-43C2-8086-228ED6D78B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BF4F362-608B-43C2-8086-228ED6D78B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BF4F362-608B-43C2-8086-228ED6D78B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F8018F1-B91D-4866-8EAA-093D2F8B14C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F8018F1-B91D-4866-8EAA-093D2F8B14C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F8018F1-B91D-4866-8EAA-093D2F8B14C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F8018F1-B91D-4866-8EAA-093D2F8B14C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

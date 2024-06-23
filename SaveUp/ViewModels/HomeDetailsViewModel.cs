@@ -1,12 +1,17 @@
 ﻿using MongoDB.Bson;
 using PropertyChanged;
 using SaveUp.Common;
+using SaveUp.Interfaces;
 using SaveUp.Interfaces.API;
 
 namespace SaveUp.ViewModels
 {
     public class HomeDetailsViewModel : BaseNotifyHandler
     {
+        private readonly IItemAPIService _itemAPIService;
+        private readonly IAlertService _alertService;
+
+
         [DependsOn(nameof(SettingsManager.Currency))]
         public string Currency => SettingsManager.Currency;
 
@@ -24,19 +29,26 @@ namespace SaveUp.ViewModels
 
         public Command DeleteCommand { get; }
 
-        public HomeDetailsViewModel()
+        public HomeDetailsViewModel(IItemAPIService itemAPIService, IAlertService alertService)
         {
+            _itemAPIService = itemAPIService;
+            _alertService = alertService;
+
             DeleteCommand = new Command(async () => await Delete());
         }
 
         public async Task Delete()
         {
-           var result = await App.Current.MainPage.DisplayAlert("Delete", "Are you sure you want to delete this item?", "Yes", "No");
+           var result = await _alertService.ConfirmAsync("Delete", "Are you sure you want to delete this item?");
             if (result)
             {
-                await App.ServiceProvider.GetService<IItemAPIService>()!.DeleteAsync(Id);
-                await App.ServiceProvider.GetService<HomeViewModel>()!.LoadItems();
-                await App.Current.MainPage.Navigation.PopAsync();
+                await _itemAPIService.DeleteAsync(Id);
+                var mainPage = Application.Current?.MainPage;
+                if (mainPage != null && mainPage.Navigation != null)
+                {
+
+                    await mainPage.Navigation.PopAsync();
+                }
             }
         }
 

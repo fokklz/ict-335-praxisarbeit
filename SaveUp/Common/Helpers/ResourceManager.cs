@@ -17,7 +17,7 @@ namespace SaveUp.Common.Helpers
         {
             var assembly = Assembly.GetExecutingAssembly();
             // a license can be obtained from https://www.syncfusion.com/products/communitylicense
-            var resourceName = "SkiServiceApp.SyncfusionLicense.txt";
+            var resourceName = "SaveUp.SyncfusionLicense.txt";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))
