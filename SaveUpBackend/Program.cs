@@ -42,7 +42,7 @@ namespace SaveUpBackend
 
             builder.Services.AddControllers();
 
-            // builder.SetupCORS();
+            builder.SetupCORS();
             builder.SetupAuthorization();
 
             var app = builder.Build();
@@ -54,11 +54,12 @@ namespace SaveUpBackend
                 app.UseSwaggerUI();
             }
 
-           // app.UseCors(AppDomain.CurrentDomain.FriendlyName);
+           app.UseCors(AppDomain.CurrentDomain.FriendlyName);
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-            app.UseHttpsRedirection();
+            // since we run in docker we can use the default http port
+            //app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseAuthentication();
@@ -82,14 +83,16 @@ namespace SaveUpBackend
                 {
                     await userService.CreateAsync(new CreateUserRequest
                     {
-                        Password = "admin",
                         Username = "admin",
+                        Password = "admin@admin.com",
+                        Email = "admin",
                         Role = RoleNames.SuperAdmin
                     });
                     await userService.CreateAsync(new CreateUserRequest
                     {
-                        Password = "user",
                         Username = "user",
+                        Password = "user",
+                        Email = "user@user.com",
                         Role = RoleNames.User
                     });
                 }

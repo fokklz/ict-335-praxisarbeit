@@ -7,6 +7,7 @@ using SaveUpBackend.Common.Generics;
 using SaveUpBackend.Interfaces;
 using SaveUpModels.DTOs.Requests;
 using SaveUpModels.DTOs.Responses;
+using SaveUpModels.Enums;
 using SaveUpModels.Models;
 using System.Security.Claims;
 
@@ -52,7 +53,7 @@ namespace SaveUpBackend.Services
         /// <returns>a login Response with all information of the loggedin user as well as a token</returns>
         public async Task<TaskResult<LoginResponse>> LoginAsync(LoginRequest model)
         {
-            var result = await _authService.VerifyPasswordAsync(model.Username, model.Password);
+            var result = await _authService.VerifyPasswordAsync(model.Email, model.Password);
             if (!result.IsSuccess) return CreateTaskResult.Error<LoginResponse>(result);
 
             var user = result.Result;
@@ -63,7 +64,7 @@ namespace SaveUpBackend.Services
             return CreateTaskResult.Success(new LoginResponse()
             {
                 Id = user.Id.ToString(),
-                Username = user.Username,
+                Email = user.Email,
                 Locked = user.Locked,
                 Role = user.Role.ToString(),
                 Auth = token,
@@ -89,7 +90,7 @@ namespace SaveUpBackend.Services
             return CreateTaskResult.Success(new LoginResponse()
             {
                 Id = user.Id.ToString(),
-                Username = user.Username,
+                Email = user.Email,
                 Locked = user.Locked,
                 Role = user.Role.ToString(),
                 Auth = result.Result.TokenData
@@ -189,6 +190,30 @@ namespace SaveUpBackend.Services
             await _context.Users.Collection.InsertOneAsync(user);
 
             return Resolve(user);
+        }
+
+        /// <summary>
+        /// Registers a new User
+        /// </summary>
+        /// <param name="createUserRequest">The Request</param>
+        /// <returns>a login Response with all information of the loggedin user as well as a token</returns>
+        public async Task<TaskResult<LoginResponse>> RegisterAsync(RegisterRequest createUserRequest)
+        {
+            var user = _mapper.Map<User>(createUserRequest);
+            user.Role = RoleNames.User;
+
+            _authService.CreatePasswordHash(createUserRequest.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            await _context.Users.Collection.InsertOneAsync(user);
+            return await LoginAsync(new LoginRequest
+            {
+                Email = createUserRequest.Email,
+                Password = createUserRequest.Password,
+                RememberMe = true
+            });
         }
 
     }

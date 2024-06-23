@@ -4,6 +4,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using SaveUpModels.Interfaces.Base;
+using SaveUpModels.Models;
 using System.Reflection;
 
 namespace SaveUpBackend.Data
@@ -59,6 +60,17 @@ namespace SaveUpBackend.Data
                 _lookupStages.Add(unwind);
             }
 
+        }
+
+        /// <summary>
+        /// Define a Index for a field
+        /// </summary>
+        /// <param name="field">The field to create the index for</param>
+        public void SetIndex(string field, bool unique = true)
+        {
+            if (_collection.Indexes.List().ToList().Any(idx => idx["name"].AsString == $"idx_{field}")) return;
+            var index = new CreateIndexModel<T>(Builders<T>.IndexKeys.Ascending(field), new CreateIndexOptions { Unique = unique });
+            _collection.Indexes.CreateOne(index);
         }
 
         /// <summary>

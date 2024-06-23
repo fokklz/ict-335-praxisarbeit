@@ -30,6 +30,8 @@ namespace SaveUpBackend.Data
             _database = _client.GetDatabase(mongoConfig.GetValue("Name", "SaveUp"));
 
             _mapper = mapper;
+
+            Users.SetIndex("Username");
         }
 
         public MongoDBCollectionWrapper<User> Users => new(_database, _mapper);

@@ -75,5 +75,19 @@ namespace SaveUpBackend.Controllers
             var result = await _service.LoginAsync(model);
             return result.IsSuccess ? Ok(result.Result) : Unauthorized(result.Exception);
         }
+
+        /// <summary>
+        /// Register a new user and return a token along with their information
+        /// </summary>
+        /// <param name="model">The RegisterRequest</param>
+        /// <returns>The LoginResponse</returns>
+        [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LoginResponse))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest model)
+        {
+            var result = await _service.RegisterAsync(model);
+            return result.IsSuccess ? Ok(result.Result) : Unauthorized(result.Exception);
+        }
     }
 }

@@ -8,6 +8,10 @@ using SaveUpModels.DTOs.Responses;
 using SaveUpModels.Enums;
 using SaveUpModels.Models;
 using SaveUpBackend.Common.Attributes;
+using System.Diagnostics;
+using MongoDB.Bson;
+using System.Globalization;
+using Microsoft.AspNetCore.Http;
 
 namespace SaveUpBackend.Controllers
 {
@@ -26,8 +30,22 @@ namespace SaveUpBackend.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public override async Task<IActionResult> Create([FromBody] CreateItemRequest entity)
         {
-            var result = await _service.CreateAsync(entity);
-            return result.IsSuccess ? Ok(result.Result) : BadRequest(result.Error);
+            Console.WriteLine(entity);
+            return await base.Create(entity);
+        }
+
+        /// <summary>
+        /// Get all by timespan for user
+        /// </summary>
+        /// <param name="userId">The target User</param>
+        /// <returns>all orders for that user</returns>
+        [HttpGet("user/{userId}/{timeSpan}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ItemResponse>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetByTimeSpanForUserAsync(string userId, string timeSpan)
+        {
+            var result = await _service.GetByTimeSpanForUserAsync(timeSpan, userId);
+            return result.IsSuccess ? Ok(result.Result) : NotFound(result.Exception);
         }
     }
 }

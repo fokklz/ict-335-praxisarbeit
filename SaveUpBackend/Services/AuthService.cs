@@ -17,7 +17,7 @@ namespace SaveUpBackend.Services
 
         public async Task<TaskResult<User>> VerifyPasswordAsync(string username, string password)
         {
-            var user = await _context.Users.FindSingleAsync(Builders<User>.Filter.Eq(x => x.Username, username));
+            var user = await _context.Users.FindSingleAsync(Builders<User>.Filter.Eq(x => x.Email, username));
             if (user == null) return CreateTaskResult.Error<User>(ErrorKey.ENTRY_NOT_FOUND);
 
             if (!user.Locked && VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))

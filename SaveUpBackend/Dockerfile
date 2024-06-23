@@ -2,11 +2,6 @@
 
 # Base stage for running the application
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
-WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-EXPOSE 8000
 
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
@@ -28,16 +23,13 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-USER root
-
-# Install SurrealDB
-RUN apt-get update && apt-get install -y curl
-RUN curl -sSf https://install.surrealdb.com | sh
-
 # Script to run both SurrealDB and the .NET application
 COPY SaveUpBackend/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 USER app
+EXPOSE 8080
+EXPOSE 8081
+EXPOSE 8000
 
 ENTRYPOINT ["/entrypoint.sh"]

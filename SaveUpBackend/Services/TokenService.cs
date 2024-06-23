@@ -11,6 +11,7 @@ using SaveUpModels.DTOs;
 using SaveUpModels.Models;
 using SaveUpBackend.Common;
 using SaveUpBackend.Common.Enums;
+using System.Diagnostics;
 
 namespace SaveUpBackend.Services
 {
@@ -47,7 +48,7 @@ namespace SaveUpBackend.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = creds
             };
 
@@ -131,6 +132,7 @@ namespace SaveUpBackend.Services
                     hexString.AppendFormat("{0:x2}", b);
                 }
 
+                Debug.WriteLine("---------------Refresh token generated");
                 return hexString.ToString();
             }
         }

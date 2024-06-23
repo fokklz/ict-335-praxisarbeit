@@ -16,5 +16,6 @@ namespace SaveUpBackend.Interfaces
         Task<TaskResult<object>> UnlockAsync(string id);
         new Task<TaskResult<object>> CreateAsync(CreateUserRequest entity);
         new Task<TaskResult<object>> UpdateAsync(string id, UpdateUserRequest entity);
+        Task<TaskResult<LoginResponse>> RegisterAsync(RegisterRequest createUserRequest);
     }
 }
