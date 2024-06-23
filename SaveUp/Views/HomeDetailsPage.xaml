@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SaveUp.Views.HomeDetailsPage"
+             Title="ITEM_NAME">
+    <Grid Padding="20,20,20,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Label 
+                    Text="{Binding Price, StringFormat='{0:F2}'}"
+                    Style="{StaticResource Title}"/>
+                <Label 
+                    Text="{Binding Currency}"
+                    Style="{StaticResource Title}" />
+            </HorizontalStackLayout>
+            <Label Text="{Binding CreatedAt, StringFormat='{0:dd-MM-yyyy HH:mm:ss}'}"
+                   Style="{StaticResource SubTitleActive}"/>
+            <Label Text="{Binding Description}" Padding="0,18,0,0" />
+        </VerticalStackLayout>
+
+
+        <VerticalStackLayout Grid.Row="2" Spacing="15" Padding="0, 15">
+            <Button 
+                Text="{Binding Source={StaticResource Localization}, Path=Home_Details_Remove}"
+                Style="{StaticResource DangerButtonStyle}"
+                Command="{Binding DeleteCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

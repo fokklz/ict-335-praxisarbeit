@@ -15,8 +15,10 @@ namespace SaveUp.Common.Helpers
 
         public static string Theme { get; private set; } = "Theme";
 
-        public static string CancelInListView { get; private set; } = "CancelInListView";
+        public static string Currency { get; private set; } = "Currency";
 
-        public static string AlwaysSaveLogin { get; private set; } = "AlwaysSaveLogin";
+        public static string TimeSpan { get; private set; } = "TimeSpan";
+
+        public static string DeptMode { get; private set; } = "DeptMode";
     }
 }

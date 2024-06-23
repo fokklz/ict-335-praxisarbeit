@@ -15,7 +15,10 @@ namespace SaveUp.Services
         /// <summary>
         /// Relay to the storage service
         /// </summary>
-        public bool HasUser => _settings.IsSome();
+        public bool HasUser()
+        {
+            return _settings.IsSome();
+        }
 
         /// <summary>
         /// Get the user from the storage
@@ -84,7 +87,7 @@ namespace SaveUp.Services
         {
             try
             {
-                var rawUser = await SecureStorage.GetAsync("saveup_user") ?? "[]";
+                var rawUser = await SecureStorage.GetAsync("saveup_user") ?? "{}";
                 var user = JsonConvert.DeserializeObject<StorageSettings>(rawUser);
                 // nothing to update
                 if (user == null) return;

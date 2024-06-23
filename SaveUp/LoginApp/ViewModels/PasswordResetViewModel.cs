@@ -62,7 +62,7 @@ namespace SaveUp.LoginApp.ViewModels
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    await _alertService.ShowAlertAsync("Invalid Email", "Please enter a valid email address", "OK");
+                    await _alertService.ShowAsync("Invalid Email", "Please enter a valid email address");
                 });
             }
         }

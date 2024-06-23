@@ -2,8 +2,7 @@
 {
     public interface IStorageService
     {
-        bool HasUser { get; }
-
+        public bool HasUser();
         (string, string) Get();
         public void Clear();
         Task InitializeAsync();

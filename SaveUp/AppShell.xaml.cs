@@ -1,4 +1,6 @@
-﻿namespace SaveUp
+﻿using SaveUp.Common;
+
+namespace SaveUp
 {
     public partial class AppShell : Shell
     {

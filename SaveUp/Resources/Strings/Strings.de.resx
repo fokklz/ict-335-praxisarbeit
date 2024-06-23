@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About.Button.Donate" xml:space="preserve">
+    <value>Spendiere mir einen Kaffee</value>
+  </data>
+  <data name="About.Button.Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="About.Devs.Title" xml:space="preserve">
+    <value>Entwickler</value>
+  </data>
+  <data name="About.Title" xml:space="preserve">
+    <value>SaveUp</value>
+  </data>
+  <data name="Add.Submit" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="Add.Title" xml:space="preserve">
+    <value>Produkt hinzufügen</value>
+  </data>
+  <data name="App.Imprint" xml:space="preserve">
+    <value>Impressum</value>
+  </data>
+  <data name="App.PrivacyPolicy" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="App.Time" xml:space="preserve">
+    <value>Zeitraum</value>
+  </data>
+  <data name="App.Time.Day" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="App.Time.Days" xml:space="preserve">
+    <value>Tage</value>
+  </data>
+  <data name="App.Time.Hour" xml:space="preserve">
+    <value>Stunde</value>
+  </data>
+  <data name="App.Time.Hours" xml:space="preserve">
+    <value>Stunden</value>
+  </data>
+  <data name="App.Time.Minute" xml:space="preserve">
+    <value>Minute</value>
+  </data>
+  <data name="App.Time.Minutes" xml:space="preserve">
+    <value>Minuten</value>
+  </data>
+  <data name="App.Time.Second" xml:space="preserve">
+    <value>Sekunde</value>
+  </data>
+  <data name="App.Time.Seconds" xml:space="preserve">
+    <value>Sekunden</value>
+  </data>
+  <data name="App.Title" xml:space="preserve">
+    <value>SaveUp</value>
+  </data>
+  <data name="AppLogin.Login.ForgotPassword" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="AppLogin.Login.Register" xml:space="preserve">
+    <value>Kein Konto? Jetzt registrieren</value>
+  </data>
+  <data name="AppLogin.Login.Submit" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="AppLogin.Login.Title" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="AppLogin.PasswordReset.CodeButton" xml:space="preserve">
+    <value>Rücksetzungscode senden</value>
+  </data>
+  <data name="AppLogin.PasswordReset.Info" xml:space="preserve">
+    <value>Bitte geben Sie Ihre E-Mail-Adresse ein, um einen Rücksetzungscode zu erhalten.</value>
+  </data>
+  <data name="AppLogin.PasswordReset.Login" xml:space="preserve">
+    <value>Zurück zur Anmeldung</value>
+  </data>
+  <data name="AppLogin.PasswordReset.Title" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+  </data>
+  <data name="AppLogin.Register.Disclaimer" xml:space="preserve">
+    <value>Durch die Registrierung akzeptieren Sie unsere Nutzungsbedingungen.</value>
+  </data>
+  <data name="AppLogin.Register.Login" xml:space="preserve">
+    <value>Zurück zur Anmeldung</value>
+  </data>
+  <data name="AppLogin.Register.Submit" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="AppLogin.Register.Title" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="Dialog.CreatedItem.Message" xml:space="preserve">
+    <value>Element erfolgreich hinzugefügt</value>
+  </data>
+  <data name="Dialog.CreatedItem.Title" xml:space="preserve">
+    <value>Erfolg</value>
+  </data>
+  <data name="Dialog.No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="Dialog.Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="Dialog.Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="Form.Clear" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Form.ConfirmPassword" xml:space="preserve">
+    <value>Passwort bestätigen</value>
+  </data>
+  <data name="Form.Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="Form.Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="Form.Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Form.Price" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="Form.Product" xml:space="preserve">
+    <value>Produktname</value>
+  </data>
+  <data name="Form.Username" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="Home.Details.Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="Settings.Button.Logout" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="Settings.Button.Timespan" xml:space="preserve">
+    <value>Zeitraum zurücksetzen</value>
+  </data>
+  <data name="Settings.Currency.Label" xml:space="preserve">
+    <value>Währung</value>
+  </data>
+  <data name="Settings.Language.Label" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="Settings.Theme.Dark" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
+  <data name="Settings.Theme.Label" xml:space="preserve">
+    <value>Design</value>
+  </data>
+  <data name="Settings.Theme.Light" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="Settings.Theme.System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Settings.Title" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+</root>

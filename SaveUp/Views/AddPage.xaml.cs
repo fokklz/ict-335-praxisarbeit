@@ -1,9 +1,12 @@
+using SaveUp.ViewModels;
+
 namespace SaveUp.Views;
 
 public partial class AddPage : ContentPage
 {
-	public AddPage()
+	public AddPage(AddViewModel viewModels)
 	{
 		InitializeComponent();
+		BindingContext = viewModels;
 	}
 }

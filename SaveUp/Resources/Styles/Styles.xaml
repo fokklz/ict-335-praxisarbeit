@@ -111,13 +111,13 @@
     </Style>
 
     <Style TargetType="Entry">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource OffBlack60}, Dark={StaticResource OffWhite60}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
@@ -421,6 +421,97 @@
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="InputFrame">
+        <Setter Property="Padding" Value="5,0,0,-3" />
+        <Setter Property="Margin" Value="0,3" />
+        <Setter Property="HasShadow" Value="False" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource OffBlack30}, Dark={StaticResource OffWhite30}}" />
+    </Style>
+
+
+    <Style TargetType="VerticalStackLayout" x:Key="InputGroup">
+        <Setter Property="Margin" Value="0,0,0,9" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="InputLabel">
+        <Setter Property="FontSize" Value="14.5" />
+        <Setter Property="Padding" Value="0,0,0,8" />
+        <Setter Property="Margin" Value="0,0,0,-5" />
+    </Style>
+
+    <Style x:Key="LinkLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="#3B82F6" />
+        <Setter Property="TextDecorations" Value="Underline" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="LinkLabelStyleDisabled" TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=Grey, Dark=LightGrey}" />
+        <Setter Property="TextDecorations" Value="Underline" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="CallToActionButtonStyle" TargetType="Button">
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BackgroundColor" Value="#9900FF" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="17" />
+    </Style>
+
+    <Style x:Key="NeturalButtonStyle" TargetType="Button">
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BackgroundColor" Value="#E5E7EB" />
+        <Setter Property="TextColor" Value="Grey" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="17" />
+    </Style>
+
+
+    <Style x:Key="DangerButtonStyle" TargetType="Button">
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BackgroundColor" Value="#EF4444" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="TextColor" Value="White" />
+    </Style>
+
+    <Style x:Key="OffFocus" TargetType="Label">
+        <Setter Property="TextColor" Value="#64748B" />
+    </Style>
+
+    <Style x:Key="Title" TargetType="Label">
+        <Setter Property="FontSize" Value="40" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="SubTitle" TargetType="Label">
+        <Setter Property="FontSize" Value="Medium" />
+    </Style>
+
+    <Style x:Key="SubTitleActive" TargetType="Label">
+        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="TextColor" Value="Gray" />
+    </Style>
+
+    <Style x:Key="SecoundTitle" TargetType="Label">
+        <Setter Property="FontSize" Value="Large" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="HeaderBorder" TargetType="Grid">
+        <Setter Property="HeightRequest" Value="2" />
+        <Setter Property="BackgroundColor" Value="DarkGray" />
+        <Setter Property="VerticalOptions" Value="End" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+    </Style>
+
+    <Style x:Key="FormLabel" TargetType="Label">
+        <Setter Property="Margin" Value="3,0" />
     </Style>
 
 </ResourceDictionary>

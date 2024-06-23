@@ -3,6 +3,8 @@ namespace SaveUp.Interfaces
 {
     public interface IAlertService
     {
-        Task ShowAlertAsync(string title, string message, string cancel);
+        Task ShowAsync(string title, string message);
+
+        Task<bool> ConfirmAsync(string title, string message);
     }
 }

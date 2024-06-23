@@ -56,5 +56,23 @@ namespace SaveUp.Services.API
             var res = await _sendRequest(HttpMethod.Post, _url(userId.ToString(), "unlock"));
             return new HTTPResponse<UserResponse>(res);
         }
+
+        /// <summary>
+        /// Register a new user
+        /// </summary>
+        /// <param name="registerRequest">The information to register the user</param>
+        /// <returns>The login response</returns>
+        public async Task<HTTPResponse<LoginResponse>> RegisterAsync(string username, string email, string password)
+        {
+            var request = new RegisterRequest
+            {
+                Username = username,
+                Email = email,
+                Password = password
+            };
+
+            var res = await _sendRequest(HttpMethod.Post, _url("register"), request);
+            return new HTTPResponse<LoginResponse>(res);
+        }
     }
 }

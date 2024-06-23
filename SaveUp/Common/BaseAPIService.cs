@@ -101,12 +101,7 @@ namespace SaveUp.Common
             var request = new HttpRequestMessage(method, url);
             if (AuthManager.IsLoggedIn)
             {
-                //request.Headers.Add("Authorization", "Bearer " + AuthManager.Token);
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthManager.Token);
-            }
-            else
-            {
-                _httpClient.DefaultRequestHeaders.Authorization = null;
+                request.Headers.Add("Authorization", "Bearer " + AuthManager.Token);
             }
 
             if (data != null)
@@ -117,12 +112,20 @@ namespace SaveUp.Common
 
             try
             {
-                return await _httpClient.SendAsync(request);
+                var res =  await _httpClient.SendAsync(request);
+#if DEBUG
+                Debug.WriteLine(await res.Content.ReadAsStringAsync());
+#endif
+                Debug.WriteLine($"Request to {url} - {method} - {res.StatusCode}");
+                return res;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Failed to send request to {url} - {method}");
+#if DEBUG
                 Debug.WriteLine(ex.Message);
+#endif
+
                 return null;
             }
         }
@@ -142,13 +145,13 @@ namespace SaveUp.Common
         /// </summary>
         /// <param name="id">The id of the entry to get</param>
         /// <returns>the target response type</returns>
-        public async Task<HTTPResponse<TResponse>> GetAsync(int id)
+        public async Task<HTTPResponse<TResponse>> GetAsync(string id)
         {
-            var res = await _sendRequest(HttpMethod.Get, _url(id.ToString()));
+            var res = await _sendRequest(HttpMethod.Get, _url(id));
             return new HTTPResponse<TResponse>(res);
         }
-
-        /// <summary>
+            
+        /// <summary>s
         /// Create a new entry in the API-Controller
         /// </summary>
         /// <param name="data">The data to send</param>
@@ -165,9 +168,9 @@ namespace SaveUp.Common
         /// <param name="id">The id of the entry to update</param>
         /// <param name="data">The data to send</param>
         /// <returns>the target response type</returns>
-        public async Task<HTTPResponse<TResponse>> UpdateAsync(int id, TUpdateRequest data)
+        public async Task<HTTPResponse<TResponse>> UpdateAsync(string id, TUpdateRequest data)
         {
-            var res = await _sendRequest(HttpMethod.Put, _url(id.ToString()), data);
+            var res = await _sendRequest(HttpMethod.Put, _url(id), data);
             return new HTTPResponse<TResponse>(res);
         }
 
@@ -176,9 +179,9 @@ namespace SaveUp.Common
         /// </summary>
         /// <param name="id">The id of the entry to delete</param>
         /// <returns>the target response type</returns>
-        public async Task<HTTPResponse<DeleteResponse>> DeleteAsync(int id)
+        public async Task<HTTPResponse<DeleteResponse>> DeleteAsync(string id)
         {
-            var res = await _sendRequest(HttpMethod.Delete, _url(id.ToString()));
+            var res = await _sendRequest(HttpMethod.Delete, _url(id));
             return new HTTPResponse<DeleteResponse>(res);
         }
     }

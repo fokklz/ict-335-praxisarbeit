@@ -1,12 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SaveUp.Views.AddPage"
-             Title="AddPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="SaveUp.Views.AddPage">
+
+    <Grid Padding="20,20,20,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Text="{Binding Source={StaticResource Localization}, Path=Add_Title}" 
+                Style="{StaticResource Title}" />
+
+        <VerticalStackLayout Padding="0,20" Grid.Row="1">
+            <VerticalStackLayout Style="{StaticResource InputGroup}" >
+                <Label 
+                    Text="{Binding Source={StaticResource Localization}, Path=Form_Product}"
+                    Style="{StaticResource InputLabel}"/>
+                <Frame Style="{StaticResource InputFrame}">
+                    <VerticalStackLayout>
+                        <Entry 
+                            Text="{Binding Product, Mode=TwoWay}" />
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Style="{StaticResource InputGroup}" >
+                <Label 
+                    Text="{Binding Source={StaticResource Localization}, Path=Form_Price}"
+                    Style="{StaticResource InputLabel}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Style="{StaticResource InputFrame}">
+                        <VerticalStackLayout>
+                            <Entry 
+                                Text="{Binding Price, Mode=TwoWay}" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Label Text="{Binding Currency}"
+                           FontSize="16"
+                        HorizontalOptions="End"
+                           VerticalOptions="Center"
+                           Padding="15,0,0,0"
+                        Grid.Column="1"/>
+                </Grid>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Style="{StaticResource InputGroup}" >
+                <Label 
+                    Text="{Binding Source={StaticResource Localization}, Path=Form_Description}"
+                    Style="{StaticResource InputLabel}"/>
+                <Frame Style="{StaticResource InputFrame}">
+                    <VerticalStackLayout>
+                        <Editor 
+                            AutoSize="TextChanges"
+                            HeightRequest="200"
+                            Text="{Binding Description, Mode=TwoWay}" />
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+
+
+        <VerticalStackLayout Grid.Row="2" Spacing="15" Padding="0, 15">
+            <Button 
+                Text="{Binding Source={StaticResource Localization}, Path=Form_Clear}"
+                Style="{StaticResource NeturalButtonStyle}"
+                Command="{Binding ClearCommand}"/>
+            <Button
+                Text="{Binding Source={StaticResource Localization}, Path=Add_Submit}"
+                Style="{StaticResource CallToActionButtonStyle}"
+                Command="{Binding AddCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

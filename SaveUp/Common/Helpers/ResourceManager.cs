@@ -33,17 +33,17 @@ namespace SaveUp.Common.Helpers
         /// <param name="key">The key to extract</param>
         /// <param name="culture">The target Language</param>
         /// <returns>The defined translation for the UI</returns>
-        /*public static string GetLanguageResource(string key, CultureInfo culture)
+        public static string GetLanguageResource(string key, CultureInfo culture)
         {
             try
             {
-                return Resources.Languages.Resources.ResourceManager.GetString(key, culture) ?? $"!{key}";
+                return Resources.Strings.Strings.ResourceManager.GetString(key, culture) ?? $"!{key}";
             }
             catch (Exception)
             {
                 return $"!{key}";
             }
-        }*/
+        }
 
     }
 }

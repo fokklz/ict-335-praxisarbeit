@@ -11,5 +11,6 @@ namespace SaveUp.Interfaces.API
         Task<HTTPResponse<LoginResponse>> RefreshAsync(RefreshRequest request);
         Task<HTTPResponse<UserResponse>> RevokeAsync();
         Task<HTTPResponse<UserResponse>> UnlockUser(int userId);
+        Task<HTTPResponse<LoginResponse>> RegisterAsync(string username, string email, string password);
     }
 }

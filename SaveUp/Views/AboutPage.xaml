@@ -1,12 +1,58 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SaveUp.Views.AboutPage"
-             Title="AboutPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:components="clr-namespace:SaveUp.Components;assembly=SaveUp"
+             x:Class="SaveUp.Views.AboutPage">
+
+    <Grid Padding="20,20,20,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout>
+            <Label Text="{Binding Source={StaticResource Localization}, Path=About_Title}" 
+            Style="{StaticResource Title}"
+            HorizontalOptions="Center"/>
+            <Label Text="{Binding Version}" 
+            Style="{StaticResource SubTitleActive}"
+            HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout VerticalOptions="Center" Grid.Row="1">
+            <Label 
+            Text="{Binding Source={StaticResource Localization}, Path=About_Devs_Title}" 
+            Style="{StaticResource SecoundTitle}"
+            HorizontalOptions="Center"
+            Margin="0,20"/>
+            <StackLayout>
+                <Label 
+                Text="Fokko Vos"
+                Style="{StaticResource LinkLabelStyle}"
+                HorizontalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer 
+                        Command="{Binding OpenUrlCommand}" 
+                        CommandParameter="https://github.com/fokklz"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="15" Padding="0, 15">
+            <Button 
+                Text="{Binding Source={StaticResource Localization}, Path=About_Button_Settings}"
+                Style="{StaticResource NeturalButtonStyle}"
+                Command="{Binding OpenSettingsCommand}"/>
+            <Button
+                Text="{Binding Source={StaticResource Localization}, Path=About_Button_Donate}"
+                Style="{StaticResource NeturalButtonStyle}"
+                Command="{Binding OpenUrlCommand}"
+                CommandParameter="https://paypal.me/VosFokko"/>
+        </VerticalStackLayout>
+
+        <components:Footer Grid.Row="3" />
+    </Grid>
 </ContentPage>

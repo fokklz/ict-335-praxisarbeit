@@ -14,9 +14,9 @@ namespace SaveUp.Common.Interfaces
         where TResponse : class
     {
         Task<HTTPResponse<TResponse>> CreateAsync(TCreateRequest data);
-        Task<HTTPResponse<DeleteResponse>> DeleteAsync(int id);
+        Task<HTTPResponse<DeleteResponse>> DeleteAsync(string id);
         Task<HTTPResponse<List<TResponse>>> GetAllAsync();
-        Task<HTTPResponse<TResponse>> GetAsync(int id);
-        Task<HTTPResponse<TResponse>> UpdateAsync(int id, TUpdateRequest data);
+        Task<HTTPResponse<TResponse>> GetAsync(string id);
+        Task<HTTPResponse<TResponse>> UpdateAsync(string id, TUpdateRequest data);
     }
 }

@@ -58,7 +58,10 @@ namespace SaveUp.Common.Models
             var json = await _response.Content.ReadAsStringAsync();
             try
             {
-                return JsonConvert.DeserializeObject<T>(json);
+                return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings
+                {
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                });
             }
             catch (Exception)
             {

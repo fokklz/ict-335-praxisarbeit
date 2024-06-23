@@ -1,66 +1,77 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:SaveUp.Components;assembly=SaveUp"
              x:Class="SaveUp.LoginApp.Views.LoginPage">
 
-    <VerticalStackLayout VerticalOptions="Center" Margin="0,0,0,200">
-        <!-- Login Heading -->
-        <Label
-            Text="Login"
+    <Grid RowDefinitions="*, Auto" >
+        <VerticalStackLayout VerticalOptions="Center" Margin="0,0,0,200">
+            <!-- Login Heading -->
+            <Label
+            Text="{Binding Source={StaticResource Localization}, Path=AppLogin_Login_Title}"
             Margin="15,0,15,20"
             FontAttributes="Bold"
             FontSize="34"/>
-        
-        <VerticalStackLayout Padding="12,0">
-            <!-- Login Form -->
-            <!-- Email -->
-            <VerticalStackLayout
-                Margin="0,0,0,10">
-                <Label 
-                    Text="Email"
-                    FontSize="18"
-                    Margin="3,0"/>
-                <Entry 
-                    Keyboard="Email"
-                    Text="{Binding Email, Mode=TwoWay}"/>
-            </VerticalStackLayout>
 
-            <!-- Password -->
-            <VerticalStackLayout
-                Margin="0,0,0,25">
-                <Label 
-                    Text="Password"
-                    FontSize="18"
-                    Margin="3,0"/>
-                <Entry
-                    IsPassword="True"
-                    Text="{Binding Password, Mode=TwoWay}" />
-                <Label 
-                    Text="Forgot your password?"
-                    Style="{StaticResource LinkLabelStyle}"
+            <VerticalStackLayout Padding="12,0">
+                <!-- Login Form -->
+                <!-- Email -->
+                <VerticalStackLayout Style="{StaticResource InputGroup}">
+                    <Label 
+                    Text="{Binding Source={StaticResource Localization}, Path=Form_Email}"
+                    Style="{StaticResource InputLabel}"/>
+                    <Frame Style="{StaticResource InputFrame}">
+                        <VerticalStackLayout>
+                            <Entry 
+                        x:Name="UnfocusMe"
+                        Keyboard="Email"
+                        Text="{Binding Email, Mode=TwoWay}"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- Password -->
+                <VerticalStackLayout Style="{StaticResource InputGroup}" Margin="0,0,0,25">
+                    <Label 
+                    Text="{Binding Source={StaticResource Localization}, Path=Form_Password}"
+                    Style="{StaticResource InputLabel}"/>
+                    <Frame Style="{StaticResource InputFrame}">
+                        <VerticalStackLayout>
+                            <Entry 
+                        Text="{Binding Password, Mode=TwoWay}" 
+                        IsPassword="True" />
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Label 
+                    Text="{Binding Source={StaticResource Localization}, Path=AppLogin_Login_ForgotPassword}"
+                    Style="{StaticResource LinkLabelStyleDisabled}"
                     Margin="3,0">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GotoPasswordReset}" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </VerticalStackLayout>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GotoPasswordReset}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </VerticalStackLayout>
 
-            <!-- Login Button and Navigation to Register -->
-            <VerticalStackLayout>
-                <Button 
-                    Text="Login"
+                <!-- Login Button and Navigation to Register -->
+                <VerticalStackLayout>
+                    <Button 
+                    Text="{Binding Source={StaticResource Localization}, Path=AppLogin_Login_Submit}"
                     Margin="3,0"
-                    Style="{StaticResource CallToActionButtonStyle}"/>
-                <Label 
-                    Text="No account? Register now"
+                    Style="{StaticResource CallToActionButtonStyle}"
+                    Command="{Binding LoginCommand}"/>
+                    <Label 
+                    Text="{Binding Source={StaticResource Localization}, Path=AppLogin_Login_Register}"
                     HorizontalOptions="End"
                     Style="{StaticResource LinkLabelStyle}"
                     Padding="0,6,0,0">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GotoRegister}" />
-                    </Label.GestureRecognizers>
-                </Label>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GotoRegister}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </VerticalStackLayout>
             </VerticalStackLayout>
         </VerticalStackLayout>
-    </VerticalStackLayout>
+
+        <components:Footer Grid.Row="1"/>
+    </Grid>
 </ContentPage>

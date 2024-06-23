@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:SaveUp.Components;assembly=SaveUp"
+             x:Class="SaveUp.Views.SettingsPage"
+             Title="{Binding Source={StaticResource Localization}, Path=Settings_Title}">
+    <Grid Padding="20,20,20,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" WidthRequest="350" HorizontalOptions="StartAndExpand">
+            <Grid Padding="0,8" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".6*"/>
+                    <ColumnDefinition Width=".4*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding Source={StaticResource Localization}, Path=Settings_Currency_Label}" VerticalOptions="Center"/>
+                <Frame Grid.Column="1" Style="{StaticResource InputFrame}">
+                    <VerticalStackLayout>
+                        <Entry
+                            Text="{Binding Currency}" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+            <Grid Padding="0,8" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".6*"/>
+                    <ColumnDefinition Width=".4*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding Source={StaticResource Localization}, Path=Settings_Theme_Label}" VerticalOptions="Center"/>
+                <Frame Grid.Column="1" Style="{StaticResource InputFrame}">
+                    <VerticalStackLayout>
+                        <Picker 
+                            ItemsSource="{Binding Themes}"
+                            ItemDisplayBinding="{Binding DisplayText}"
+                            SelectedItem="{Binding SelectedTheme}" 
+                            VerticalOptions="Center" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <Grid Padding="0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".6*"/>
+                    <ColumnDefinition Width=".4*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding Source={StaticResource Localization}, Path=Settings_Language_Label}" VerticalOptions="Center"/>
+                <Frame Grid.Column="1" Style="{StaticResource InputFrame}">
+                    <VerticalStackLayout>
+                        <Picker 
+                            ItemsSource="{Binding Languages}"
+                            SelectedItem="{Binding SelectedLanguage}" 
+                            VerticalOptions="Center" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+        </StackLayout>
+
+        <Label 
+            Grid.Row="1"
+            Text="{Binding Source={StaticResource Localization}, Path=App_Time, StringFormat='{0}:'}"
+            Style="{StaticResource SubTitle}" />
+        <components:TimeSpanDisplay
+            Grid.Row="1" 
+            HorizontalOptions="End"  />
+
+        <VerticalStackLayout Grid.Row="3" Spacing="15" Padding="0, 10">
+            <Button 
+                Text="{Binding Source={StaticResource Localization}, Path=Settings_Button_Timespan}"
+                Style="{StaticResource DangerButtonStyle}"
+                Command="{Binding ResetTimeSpanCommand}"/>
+            <Button 
+                Text="{Binding Source={StaticResource Localization}, Path=Settings_Button_Logout}"
+                Style="{StaticResource DangerButtonStyle}"
+                Command="{Binding LogoutCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

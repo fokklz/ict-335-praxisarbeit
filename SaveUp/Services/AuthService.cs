@@ -5,6 +5,7 @@ using SaveUp.Interfaces;
 using SaveUp.Interfaces.API;
 using SaveUpModels.DTOs.Requests;
 using SaveUpModels.DTOs.Responses;
+using System.Diagnostics;
 
 namespace SaveUp.Services
 {
@@ -12,11 +13,13 @@ namespace SaveUp.Services
     {
         private readonly IUserAPIService _userAPIService;
         private readonly IStorageService _storageService;
+        private readonly IAlertService _alertService;
 
-        public AuthService(IUserAPIService userAPIService, IStorageService storageService)
+        public AuthService(IUserAPIService userAPIService, IStorageService storageService, IAlertService alertService)
         {
             _storageService = storageService;
             _userAPIService = userAPIService;
+            _alertService = alertService;
         }
 
         /// <summary>
@@ -37,7 +40,7 @@ namespace SaveUp.Services
                     var refreshToken = parsed.Auth.RefreshToken;
                     if (refreshToken != null)
                     {
-                        _storageService.StoreUser(parsed.Username, parsed.Auth.Token, refreshToken);
+                        _storageService.StoreUser(parsed.Email, parsed.Auth.Token, refreshToken);
                         await _storageService.SaveChangesAsync();
                     }
 
@@ -56,6 +59,24 @@ namespace SaveUp.Services
             }
 
             return res;
+        }
+
+        /// <summary>
+        /// Try to login a user from the storage
+        /// </summary>
+        public async Task TryLoginFromStorage()
+        {
+
+            if (_storageService.HasUser())
+            {
+                var user = _storageService.Get(); 
+                var res = await LoginAsyncWithToken(user.Item1, user.Item2);
+                Debug.WriteLine($"Login from storage: {res.IsSuccess}");
+                if (res.IsSuccess)
+                {
+                    Debug.WriteLine("--- Login from storage successful");
+                }
+            }
         }
 
         /// <summary>
@@ -78,15 +99,15 @@ namespace SaveUp.Services
         /// <summary>
         /// Login a user to the application
         /// </summary>
-        /// <param name="username">The username of the user</param>
+        /// <param name="email">The username of the user</param>
         /// <param name="password">The password of the user</param>
         /// <param name="rememberMe">Whether the user should be remembered for future logins</param>
         /// <returns>The Response, The command to switch to main app</returns>
-        public async Task<HTTPResponse<LoginResponse>> LoginAsync(string username, string password, bool rememberMe)
+        public async Task<HTTPResponse<LoginResponse>> LoginAsync(string email, string password, bool rememberMe)
         {
             var data = new LoginRequest
             {
-                Username = username,
+                Email = email,
                 Password = password,
                 RememberMe = rememberMe
             };
@@ -100,23 +121,13 @@ namespace SaveUp.Services
         /// <returns>a ICommand to be run when ready to navigate away</returns>
         public async Task LogoutAsync(bool force = false)
         {
-            if (force || SettingsManager.AlwaysSaveLogin)
+            var result = false;
+            if (!force) result = await _alertService.ConfirmAsync("LogoutTitle", "LogoutMessage");
+            if (force || result)
             {
-                if (force) _storageService.Clear();
+                _storageService.Clear();
                 AuthManager.Logout();
-                return;
             }
-            /*await DialogService.ShowDialog(new LogoutDialog(), (result) =>
-            {
-                if (result)
-                {
-                    AuthManager.Logout();
-                }
-            },
-            titleText: Localization.Instance.LogoutDialog_Title,
-            submitText: Localization.Instance.LogoutDialog_Submit,
-            dangerText: Localization.Instance.LogoutDialog_Danger,
-            dangerCommand: new Command(() => _storageService.RemoveUserByRefreshToken(AuthManager.RefreshToken)));*/
         }
     }
 } 

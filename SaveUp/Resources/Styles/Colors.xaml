@@ -4,6 +4,28 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!-- Error Colors for light/dark-->
+    <Color x:Key="Red">#EF5350</Color>
+    <Color x:Key="RedAccent">#660000</Color>
+    <Color x:Key="RedDark">#660000</Color>
+    <Color x:Key="RedDarkAccent">#400000</Color>
+    <!-- Text counter parts -->
+    <Color x:Key="RedText">#FAFAFA</Color>
+    <Color x:Key="RedDarkText">#FAFAFA</Color>
+    <SolidColorBrush x:Key="RedBrush" Color="{StaticResource Red}" />
+    <SolidColorBrush x:Key="RedDarkBrush" Color="{StaticResource RedDark}" />
+
+    <Color x:Key="Transparent">Transparent</Color>
+    <Color x:Key="White">White</Color>
+    <Color x:Key="Black">Black</Color>
+    <Color x:Key="OffWhite">#FAFAFA</Color>
+    <Color x:Key="OffBlack">#212121</Color>
+    <Color x:Key="OffWhite30">#4DFAFAFA</Color>
+    <Color x:Key="OffBlack30">#4D212121</Color>
+    <Color x:Key="OffWhite60">#99FAFAFA</Color>
+    <Color x:Key="OffBlack60">#99212121</Color>
+    <Color x:Key="SemiTransparentOffBlack">#99212121</Color>
+
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
     <Color x:Key="Primary">#512BD4</Color>
@@ -13,11 +35,8 @@
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
 
-    <Color x:Key="White">White</Color>
-    <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>
     <Color x:Key="MidnightBlue">#190649</Color>
-    <Color x:Key="OffBlack">#1f1f1f</Color>
 
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>

@@ -10,20 +10,9 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <Style x:Key="LinkLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="#3B82F6" />
-                <Setter Property="TextDecorations" Value="Underline" />
-                <Setter Property="HorizontalOptions" Value="Start" />
-                <Setter Property="VerticalOptions" Value="Center" />
-            </Style>
-
-            <Style x:Key="CallToActionButtonStyle" TargetType="Button">
-                <Setter Property="CornerRadius" Value="0" />
-                <Setter Property="BackgroundColor" Value="#9900FF" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="FontSize" Value="17" />
-            </Style>
+            
+            <common:Localization x:Key="Localization" />
+            <common:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

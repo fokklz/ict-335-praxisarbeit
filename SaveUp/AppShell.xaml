@@ -4,12 +4,26 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SaveUp"
+    xmlns:views="clr-namespace:SaveUp.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="SaveUp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <!-- Tab for the HomePage -->
+        <Tab Title="Home" Icon="icon_home.png" >
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" />
+        </Tab>
+
+
+        <!-- Tab for the RecentPage -->
+        <Tab Title="Add" Icon="icon_add.png" >
+            <ShellContent ContentTemplate="{DataTemplate views:AddPage}" />
+        </Tab>
+
+        <!-- Tab for the AboutPage -->
+        <Tab Title="About" Icon="icon_about.png" >
+            <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" />
+        </Tab>
+    </TabBar>
 
 </Shell>

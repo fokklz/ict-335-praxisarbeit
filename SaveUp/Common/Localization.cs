@@ -1,57 +1,31 @@
-﻿using PropertyChanged;
+using PropertyChanged;
+using SaveUp.Models;
 using SaveUp.Common.Events;
-using SaveUp.Common.Helpers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.Diagnostics;
+using System.Resources;
 
 namespace SaveUp.Common
 {
-    public class Localization
+    public class Localization : INotifyPropertyChanged
     {
-        /*/// <summary>
+        private static ResourceManager _resourceManager;
+
+        /// <summary>
+        /// Accessor for the current culture of the app
+        /// Also updates the flyout item titles when the culture is changed since they don't update automatically
+        /// </summary>
+        public CultureInfo CurrentCulture { get; set; }
+
+        /// <summary>
         /// All supported languages with their corresponding culture code
         /// </summary>
         public static Dictionary<string, string> LanguageMap = new Dictionary<string, string>
         {
-            {"العربية", "ar"},
             {"Deutsch", "de"},
             {"English", "en"},
-            {"Español", "es"},
-            {"Français", "fr"},
-            {"Italiano", "it"},
-            {"Nederlands", "nl"},
-            {"Polski", "pl"},
-            {"Português", "pt"},
-            {"Русский", "ru"},
-            {"Türkçe", "tr"},
-            {"한국어", "ko"},
-            {"日本語", "ja"},
-            {"中文(简体)", "zh-Hans"},
-            {"中文(繁體)", "zh-Hant"},
-            {"Svenska", "sv"},
-            {"Dansk", "da"},
-            {"Suomi", "fi"},
-            {"Norsk", "no"},
-            {"Čeština", "cs"},
-            {"Magyar", "hu"},
-            {"Ελληνικά", "el"},
-            {"עברית", "he"},
-            {"ไทย", "th"},
-            {"हिंदी", "hi"},
-            {"Български", "bg"},
-            {"Română", "ro"},
-            {"Українська", "uk"},
-            {"Hrvatski", "hr"},
-            {"Slovenský", "sk"},
-            {"Lietuvių", "lt"},
-            {"Slovenščina", "sl"},
-            {"Eesti", "et"},
-            {"Latviešu", "lv"},
-            {"Tiếng Việt", "vi"},
-            {"Bahasa Indonesia", "id"},
-            {"Filipino", "fil"},
-            {"Bahasa Melayu", "ms"}
         };
 
         /// <summary>
@@ -68,6 +42,7 @@ namespace SaveUp.Common
 
         public Localization()
         {
+            _resourceManager = Resources.Strings.Strings.ResourceManager;
             Instance = this;
         }
 
@@ -83,11 +58,12 @@ namespace SaveUp.Common
         public static void SetLanguage(string language)
         {
             string code;
-            if (!LanguageMap.TryGetValue(language, out code))
+            if (language == null || !LanguageMap.TryGetValue(language, out code))
             {
                 code = "de";
             }
             var culture = new CultureInfo(code);
+            Debug.WriteLine($"Localization: Setting language to {language} ({code})");
             Thread.CurrentThread.CurrentUICulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
             Instance.CurrentCulture = culture;
@@ -102,7 +78,8 @@ namespace SaveUp.Common
         /// </summary>
         private static void UpdateFlyoutItemTitles()
         {
-            if (Shell.Current?.Items is null)
+            // not sure if tabs will update, flyout did not
+            /*if (Shell.Current?.Items is null)
                 return;
 
             foreach (var item in Shell.Current.Items)
@@ -114,7 +91,7 @@ namespace SaveUp.Common
                         continue;
                     flyoutItem.Title = Instance.GetResource(id.Replace('_', '.'));
                 }
-            }
+            }*/
         }
 
         /// <summary>
@@ -125,27 +102,227 @@ namespace SaveUp.Common
         /// <returns>The resolved value as string</returns>
         public string GetResource(string key)
         {
-            return ResourceManager.GetLanguageResource(key, CurrentCulture);
+            try { 
+                // Try to get the string for the current culture
+                string result = _resourceManager.GetString(key, CurrentCulture);
+
+                // If not found, fallback to the default resource file
+                if (string.IsNullOrEmpty(result))
+                {
+                    result = _resourceManager.GetString(key, CultureInfo.InvariantCulture);
+                }
+
+                if (string.IsNullOrEmpty(result))
+                {
+                    // If still not found, return the key
+                    var splitted = key.Split('.');
+                    return splitted.Length >= 2 ? splitted[splitted.Length - 2] : splitted[splitted.Length - 1];
+                }
+
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details
+                Console.WriteLine($"Exception: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
+            }
+
+            return key;
         }
 
-        /// <summary>
-        /// Accessor for the current culture of the app
-        /// Also updates the flyout item titles when the culture is changed since they don't update automatically
-        /// </summary>
-        public CultureInfo CurrentCulture { get; set; }
-
-        [DependsOn(nameof(CurrentCulture))]
-        public ObservableCollection<PickerIte<string>> ThemeDropdown => new ObservableCollection<PickerItem<string>> {
-            new PickerItem<string> { DisplayText = Instance.SettingsPage_Theme_System, BackgroundValue = "System" },
-            new PickerItem<string> { DisplayText = Instance.SettingsPage_Theme_Dark, BackgroundValue = "Dark" },
-            new PickerItem<string> { DisplayText = Instance.SettingsPage_Theme_Light, BackgroundValue = "Light" }
+        public ObservableCollection<PickerItem<string>> GetThemeDropdown()
+        {
+            return new ObservableCollection<PickerItem<string>> {
+            new PickerItem<string> { DisplayText = Instance.Settings_Theme_System, BackgroundValue = "System" },
+            new PickerItem<string> { DisplayText = Instance.Settings_Theme_Dark, BackgroundValue = "Dark" },
+            new PickerItem<string> { DisplayText = Instance.Settings_Theme_Light, BackgroundValue = "Light" }
         };
+        } 
+
+        #region Dialogs
+        [DependsOn(nameof(CurrentCulture))]
+        public string Dialog_Ok => GetResource("Dialog.Ok");
 
         [DependsOn(nameof(CurrentCulture))]
-        public string OrderList_Search => GetResource("OrderList.Search");
+        public string Dialog_No => GetResource("Dialog.No");
+
         [DependsOn(nameof(CurrentCulture))]
-        public string AppLogin_LastLoginsLabel => GetResource("AppLogin.LastLoginsLabel");
-        [DependsOn(nameof(CurrentCulture))]*/
+        public string Dialog_Yes => GetResource("Dialog.Yes");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Dialog_CreatedItem_Title => GetResource("Dialog.CreatedItem.Title");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Dialog_CreatedItem_Message => GetResource("Dialog.CreatedItem.Message");
+        #endregion
+
+        #region App
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Title => GetResource("App.Title");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Time => GetResource("App.Time");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Time_Day => GetResource("App.Time.Day");
+        
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Time_Days => GetResource("App.Time.Days");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Time_Hour => GetResource("App.Time.Hour");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Time_Hours => GetResource("App.Time.Hours");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Time_Minute => GetResource("App.Time.Minute");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Time_Minutes => GetResource("App.Time.Minutes");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Time_Second => GetResource("App.Time.Second");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Time_Seconds => GetResource("App.Time.Seconds");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_Imprint => GetResource("App.Imprint");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string App_PrivacyPolicy => GetResource("App.PrivacyPolicy"); 
+        #endregion
+
+        #region LoginPage
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_Login_Title => GetResource("AppLogin.Login.Title");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_Login_ForgotPassword => GetResource("AppLogin.Login.ForgotPassword");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_Login_Submit => GetResource("AppLogin.Login.Submit");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_Login_Register => GetResource("AppLogin.Login.Register");
+        #endregion
+
+        #region RegisterPage
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_Register_Title => GetResource("AppLogin.Register.Title");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_Register_Submit => GetResource("AppLogin.Register.Submit");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_Register_Disclaimer => GetResource("AppLogin.Register.Disclaimer");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_Register_Login => GetResource("AppLogin.Register.Login");
+        #endregion
+
+        #region PasswordResetPage
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_PasswordReset_Title => GetResource("AppLogin.PasswordReset.Title");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_PasswordReset_Info => GetResource("AppLogin.PasswordReset.Info");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_PasswordReset_CodeButton => GetResource("AppLogin.PasswordReset.CodeButton");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string AppLogin_PasswordReset_Login => GetResource("AppLogin.PasswordReset.Login");
+        #endregion
+
+        #region Forms
+        [DependsOn(nameof(CurrentCulture))]
+        public string Form_Username => GetResource("Form.Username");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Form_Email => GetResource("Form.Email");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Form_Password => GetResource("Form.Password");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Form_ConfirmPassword => GetResource("Form.ConfirmPassword");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Form_Product => GetResource("Form.Product");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Form_Price => GetResource("Form.Price");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Form_Description => GetResource("Form.Description");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Form_Clear => GetResource("Form.Clear");
+        #endregion
+
+        #region HomePage
+        [DependsOn(nameof(CurrentCulture))]
+        public string Home_Details_Remove => GetResource("Home.Details.Remove");
+        #endregion
+
+        #region AddPage
+        [DependsOn(nameof(CurrentCulture))]
+        public string Add_Title => GetResource("Add.Title");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Add_Submit => GetResource("Add.Submit");
+        #endregion
+
+        #region AboutPage
+        [DependsOn(nameof(CurrentCulture))]
+        public string About_Title => GetResource("About.Title");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string About_Devs_Title => GetResource("About.Devs.Title");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string About_Button_Settings => GetResource("About.Button.Settings");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string About_Button_Donate => GetResource("About.Button.Donate");
+        #endregion
+
+        #region SettingsPage
+        [DependsOn(nameof(CurrentCulture))]
+        public string Settings_Title => GetResource("Settings.Title");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Settings_Currency_Label => GetResource("Settings.Currency.Label");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Settings_Language_Label => GetResource("Settings.Language.Label");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Settings_Theme_Label => GetResource("Settings.Theme.Label");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Settings_Theme_System => GetResource("Settings.Theme.System");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Settings_Theme_Dark => GetResource("Settings.Theme.Dark");
+        
+        [DependsOn(nameof(CurrentCulture))]
+        public string Settings_Theme_Light => GetResource("Settings.Theme.Light");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Settings_Button_Timespan => GetResource("Settings.Button.Timespan");
+
+        [DependsOn(nameof(CurrentCulture))]
+        public string Settings_Button_Logout => GetResource("Settings.Button.Logout");
+        #endregion
+
 
     }
 }
