@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson;
+using Newtonsoft.Json;
 using SaveUpModels.Common.Attributes;
 using SaveUpModels.DTOs.Requests.Base;
 using SaveUpModels.Interfaces;
@@ -13,9 +14,11 @@ namespace SaveUpModels.DTOs.Requests
     public class CreateItemRequest : CreateRequest, IItem
     {
 
+        [JsonProperty("user_id")]
+        public string UserId { get; set; }
+
         [JsonProperty("description")]
-        [MinLength(20, ErrorMessage = "The description must at least 20 characters long.")]
-        public required string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
 
         [JsonProperty("name")]
@@ -27,10 +30,13 @@ namespace SaveUpModels.DTOs.Requests
         [Range(1, 1000, ErrorMessage = "The price must be between 1 and 1000.")]
         public int Price { get; set; }
 
-        int? IItemBase.Price
+        ObjectId IItem.UserId
         {
-            get => Price;
-            set => Price = value ?? 0;
+            get => ObjectId.Parse(UserId);
+            set => UserId = value.ToString();
         }
+
+        [JsonProperty("timespan")]
+        public string TimeSpan { get; set; }
     }
 }

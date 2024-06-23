@@ -1,7 +1,45 @@
 services:
-  web:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  redis-commander:
+    image: rediscommander/redis-commander
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+
+  mongodb:
+    image: mongo
+    ports:
+      - "17017:27017"
+    volumes:
+      - mongo-data:/data/db    
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: superadmin
+      MONGO_INITDB_ROOT_PASSWORD: superadmin
+
+  saveup:
     build:
       context: .
       dockerfile: SaveUpBackend/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Databases__Redis__URL=redis://redis:6379
+      - Databases__MongoDB__URL=mongodb://superadmin:superadmin@mongodb:27017/
+      - CORS__AllowedOrigins=http://10.0.2.2:8000,http://127.0.0.1:8000,http://localhost:8000
     ports:
-      - "3000:8080"
+      - "8000:8080"
+    depends_on:
+      - mongodb
+      - redis
+
+volumes:
+  redis-data: {}
+  mongo-data: {}

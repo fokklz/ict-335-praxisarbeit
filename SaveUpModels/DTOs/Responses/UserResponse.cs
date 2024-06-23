@@ -14,6 +14,10 @@ namespace SaveUpModels.DTOs.Responses
     public class UserResponse : ModelResponse, IUser, IResponseDTO
     {
         [AllowNull, NotNull]
+        [JsonProperty("email")]
+        public string Email { get; set; }
+
+        [AllowNull, NotNull]
         [JsonProperty("username")]
         public string Username { get; set; }
 

@@ -7,8 +7,8 @@ namespace SaveUpModels.DTOs.Requests
     public class LoginRequest : IAuthRequest
     {
         [Required]
-        [JsonProperty("username")]
-        public required string Username { get; set; }
+        [JsonProperty("email")]
+        public required string Email { get; set; }
 
         [Required]
         [JsonProperty("password")]

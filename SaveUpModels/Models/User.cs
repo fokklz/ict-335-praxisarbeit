@@ -15,6 +15,10 @@ namespace SaveUpModels.Models
         [AllowNull, NotNull]
         public string Username { get; set; }
 
+        [BsonElement("email")]
+        [AllowNull, NotNull]
+        public string Email { get; set; }
+
         [BsonElement("password_hash")]
         [BsonRepresentation(BsonType.Binary)]
         [AllowNull, NotNull]

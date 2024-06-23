@@ -12,11 +12,8 @@ namespace SaveUpModels.DTOs.Requests
 {
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [ModelType(typeof(User))]
-    public class CreateUserRequest : CreateRequest, IUser
+    public class RegisterRequest : CreateRequest, IUser
     {
-        [JsonProperty("role")]
-        public RoleNames Role { get; set; }
-
         [JsonProperty("username")]
         public string Username { get; set; }
 
@@ -27,7 +24,7 @@ namespace SaveUpModels.DTOs.Requests
         [JsonProperty("password")]
         public required string Password { get; set; }
 
-        // Hidden properties since they are not allowed to be updated
+        // Hidden properties since they are not allowed to be registered
 
         int IUserBase.LoginAttempts { get; set; }
         string? IUserBase.RefreshToken { get; set; }
@@ -36,5 +33,6 @@ namespace SaveUpModels.DTOs.Requests
         [AllowNull]
         byte[] IUserBase.PasswordSalt { get; set; }
         bool IUserBase.Locked { get; set; }
+        RoleNames IUserBase.Role { get; set; }
     }
 }

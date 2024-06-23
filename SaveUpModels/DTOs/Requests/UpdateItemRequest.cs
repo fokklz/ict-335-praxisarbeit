@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson;
+using Newtonsoft.Json;
 using SaveUpModels.Common.Attributes;
 using SaveUpModels.DTOs.Requests.Base;
 using SaveUpModels.Interfaces;
@@ -24,6 +25,13 @@ namespace SaveUpModels.DTOs.Requests
         [Range(1, 1000, ErrorMessage = "The price must be between 1 and 1000.")]
         public int? Price { get; set; } = null;
 
+        [JsonProperty("timespan")]
+        public string? TimeSpan { get; set; } = null;
+
+        [JsonProperty("user_id")]
+        public string? UserId { get; set; }
+
+
         // Implemented properties but with allowed null values
 
         string IItemBase.Description
@@ -37,5 +45,24 @@ namespace SaveUpModels.DTOs.Requests
             get => Name ?? string.Empty;
             set => Name = value;
         }
+
+        int IItemBase.Price
+        {
+            get => Price ?? 0;
+            set => Price = value;
+        }
+
+        string IItemBase.TimeSpan
+        {
+            get => TimeSpan ?? string.Empty;
+            set => TimeSpan = value;
+        }
+
+        ObjectId IItem.UserId
+        {
+            get => ObjectId.Parse(UserId);
+            set => UserId = value.ToString();
+        }
+
     }
 }

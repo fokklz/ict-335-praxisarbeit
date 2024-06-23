@@ -11,6 +11,7 @@ namespace SaveUpModels.Interfaces.Models
         byte[] PasswordSalt { get; set; }
         string? RefreshToken { get; set; }
         RoleNames Role { get; set; }
+        string Email { get; set; }
         string Username { get; set; }
     }
 }

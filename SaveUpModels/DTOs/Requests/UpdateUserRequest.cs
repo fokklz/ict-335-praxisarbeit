@@ -18,8 +18,11 @@ namespace SaveUpModels.DTOs.Requests
         public RoleNames? Role { get; set; } = null;
 
         [JsonProperty("username")]
-        [RegularExpression("^[a-zA-Z0-9._-]{3,}$", ErrorMessage = "Invalid username format.")]
         public string? Username { get; set; } = null;
+
+        [JsonProperty("email")]
+        [RegularExpression("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", ErrorMessage = "Invalid email format.")]
+        public string? Email { get; set; } = null;
 
         [JsonProperty("locked")]
         public bool? Locked { get; set; } = null;
@@ -28,6 +31,12 @@ namespace SaveUpModels.DTOs.Requests
         public string? Password { get; set; } = null;
 
         // Implemented properties but with allowed null values
+
+        string IUserBase.Email
+        {
+            get => Email ?? string.Empty;
+            set => Email = value;
+        }
 
         string IUserBase.Username
         {

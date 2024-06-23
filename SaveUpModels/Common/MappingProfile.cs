@@ -17,6 +17,8 @@ namespace SaveUpModels.Common
             CreateAdminMap<CreateItemRequest, Item>();
             CreateAdminMap<CreateUserRequest, User>();
 
+            CreateAdminMap<RegisterRequest, User>();
+
             CreateAdminMap<User, UserResponse>(true);
             CreateAdminMap<Item, ItemResponse>(true);
         }

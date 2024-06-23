@@ -18,6 +18,20 @@ namespace SaveUpModels.Models
 
         [BsonElement("price")]
         [AllowNull, NotNull]
-        public int? Price { get; set; }
+        public int Price { get; set; }
+
+        [BsonElement("created_at")]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [BsonElement("timespan")]
+        public string TimeSpan { get; set; }
+
+        [BsonElement("user_id")]
+        public ObjectId UserId { get; set; }
+
+        [BsonElement("user")]
+        [AllowNull, NotNull]
+        public virtual IUser User { get; set; }
+        public bool ShouldSerializeUser() => false;
     }
 }
