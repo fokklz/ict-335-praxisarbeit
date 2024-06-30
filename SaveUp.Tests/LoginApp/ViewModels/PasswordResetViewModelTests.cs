@@ -23,9 +23,9 @@ namespace SaveUp.Tests.LoginApp.ViewModels
         [Fact]
         public void PasswordResetViewModel_InitializesCorrectly()
         {
-            Assert.NotNull(_viewModel.SubmitEmail);
-            Assert.NotNull(_viewModel.SubmitCode);
-            Assert.NotNull(_viewModel.SubmitPassword);
+            Assert.NotNull(_viewModel.SubmitEmailCommand);
+            Assert.NotNull(_viewModel.SubmitCodeCommand);
+            Assert.NotNull(_viewModel.SubmitPasswordCommand);
             Assert.NotNull(_viewModel.GotoLogin);
             Assert.True(_viewModel.IsEmailStepVisible);
         }
@@ -34,7 +34,7 @@ namespace SaveUp.Tests.LoginApp.ViewModels
         public void SubmitEmail_ValidEmail_ProceedsToNextStep()
         {
             _viewModel.Email = "valid@example.com";
-            _viewModel.SubmitEmail.Execute(null);
+            _viewModel.SubmitEmailCommand.Execute(null);
 
             Assert.False(_viewModel.IsEmailStepVisible);
         }
@@ -43,7 +43,7 @@ namespace SaveUp.Tests.LoginApp.ViewModels
         public void SubmitCode_SubmitsCode()
         {
             // Placeholder for actual implementation
-            _viewModel.SubmitCode.Execute(null);
+            _viewModel.SubmitCodeCommand.Execute(null);
 
             // For now, just ensure the command executes
             Assert.True(true);
@@ -53,7 +53,7 @@ namespace SaveUp.Tests.LoginApp.ViewModels
         public void SubmitPassword_SubmitsPassword()
         {
             // Placeholder for actual implementation
-            _viewModel.SubmitPassword.Execute(null);
+            _viewModel.SubmitPasswordCommand.Execute(null);
 
             // For now, just ensure the command executes
             Assert.True(true);

@@ -60,7 +60,9 @@ namespace SaveUp.Services.API
         /// <summary>
         /// Register a new user
         /// </summary>
-        /// <param name="registerRequest">The information to register the user</param>
+        /// <param name="username">The username of the user</param>
+        /// <param name="email">The email of the user</param>
+        /// <param name="password">The password of the user</param>
         /// <returns>The login response</returns>
         public async Task<HTTPResponse<LoginResponse>> RegisterAsync(string username, string email, string password)
         {

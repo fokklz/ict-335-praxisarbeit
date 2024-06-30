@@ -1,5 +1,8 @@
 ﻿namespace SaveUp.Common.Events
 {
+    /// <summary>
+    /// Event arguments for the language changed event
+    /// </summary>
     public class LanguageChangedEventArgs : EventArgs
     {
         public string Language { get; set; }

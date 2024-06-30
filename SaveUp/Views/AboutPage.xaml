@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- Title and version -->
         <VerticalStackLayout>
             <Label Text="{Binding Source={StaticResource Localization}, Path=About_Title}" 
             Style="{StaticResource Title}"
@@ -21,6 +22,7 @@
             HorizontalOptions="Center"/>
         </VerticalStackLayout>
 
+        <!-- Developers -->
         <VerticalStackLayout VerticalOptions="Center" Grid.Row="1">
             <Label 
             Text="{Binding Source={StaticResource Localization}, Path=About_Devs_Title}" 
@@ -41,6 +43,7 @@
             </StackLayout>
         </VerticalStackLayout>
 
+        <!-- Actions -->
         <VerticalStackLayout Grid.Row="2" Spacing="15" Padding="0, 15">
             <Button 
                 Text="{Binding Source={StaticResource Localization}, Path=About_Button_Settings}"
@@ -53,6 +56,7 @@
                 CommandParameter="https://paypal.me/VosFokko"/>
         </VerticalStackLayout>
 
+        <!-- Footer -->
         <components:Footer Grid.Row="3" />
     </Grid>
 </ContentPage>

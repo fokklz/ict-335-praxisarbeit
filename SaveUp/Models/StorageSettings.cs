@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SaveUp.Models
 {
+    /// <summary>
+    /// The Model for the storage settings
+    /// </summary>
     public class StorageSettings
     {
         public string? Username { get; set; }

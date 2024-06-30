@@ -4,10 +4,19 @@ namespace SaveUp.ViewModels
 {
     public class AboutViewModel : BaseNotifyHandler
     {
+        /// <summary>
+        /// Command to open a URL in the default browser.
+        /// </summary>
         public Command OpenUrlCommand { get; }
 
+        /// <summary>
+        /// Command to open the settings page.
+        /// </summary>
         public Command OpenSettingsCommand { get; }
 
+        /// <summary>
+        /// The version of the app.
+        /// </summary>
         public string Version { get; set; } = App.VERSION;
 
         public AboutViewModel()
@@ -17,7 +26,11 @@ namespace SaveUp.ViewModels
             {
                 var viewModel = App.ServiceProvider.GetService<SettingsViewModel>()!;
                 var settings = new SettingsPage(viewModel);
-                await App.Current?.MainPage.Navigation.PushAsync(settings);
+                var mainPage = App.Current?.MainPage;
+                if (mainPage != null)
+                {
+                    await mainPage.Navigation.PushAsync(settings);
+                }
             });
         }
 

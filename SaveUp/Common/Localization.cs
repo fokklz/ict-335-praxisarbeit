@@ -43,6 +43,7 @@ namespace SaveUp.Common
         public Localization()
         {
             _resourceManager = Resources.Strings.Strings.ResourceManager;
+            CurrentCulture = CultureInfo.CurrentCulture;
             Instance = this;
         }
 
@@ -51,12 +52,13 @@ namespace SaveUp.Common
             LanguageChanged?.Invoke(this, new LanguageChangedEventArgs(newLanguage, code));
         }
 
-        /// <summary>
-        /// Allows to set the language of the app
-        /// </summary>
-        /// <param name="language">The language to use</param>
         public static void SetLanguage(string language)
         {
+            if (Instance == null)
+            {
+                throw new InvalidOperationException("Localization instance is not initialized.");
+            }
+
             string code;
             if (language == null || !LanguageMap.TryGetValue(language, out code))
             {
@@ -138,10 +140,10 @@ namespace SaveUp.Common
         public ObservableCollection<PickerItem<string>> GetThemeDropdown()
         {
             return new ObservableCollection<PickerItem<string>> {
-            new PickerItem<string> { DisplayText = Instance.Settings_Theme_System, BackgroundValue = "System" },
-            new PickerItem<string> { DisplayText = Instance.Settings_Theme_Dark, BackgroundValue = "Dark" },
-            new PickerItem<string> { DisplayText = Instance.Settings_Theme_Light, BackgroundValue = "Light" }
-        };
+                new PickerItem<string> { DisplayText = Instance.Settings_Theme_System, BackgroundValue = "System" },
+                new PickerItem<string> { DisplayText = Instance.Settings_Theme_Dark, BackgroundValue = "Dark" },
+                new PickerItem<string> { DisplayText = Instance.Settings_Theme_Light, BackgroundValue = "Light" }
+            };
         } 
 
         #region Dialogs

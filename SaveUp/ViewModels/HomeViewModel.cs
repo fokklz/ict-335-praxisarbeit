@@ -13,14 +13,24 @@ namespace SaveUp.ViewModels
     {
         private readonly IItemAPIService _itemAPIService;
 
+        /// <summary>
+        /// Currency to use
+        /// </summary>
         public string Currency { get; set; } = SettingsManager.Currency;
 
+        /// <summary>
+        /// The total amount of all items
+        /// </summary>
         public int TotalAmount { get; set; } = 0;
 
-        public string TimeSpan { get; set; } = string.Empty;
-
+        /// <summary>
+        /// The items to display
+        /// </summary>
         public ObservableCollection<ItemResponse> Items { get; set; } = new ObservableCollection<ItemResponse>();
 
+        /// <summary>
+        /// The selected item, to open the detail page
+        /// </summary>
         private ItemResponse selectedItem;
         public ItemResponse SelectedItem
         {
@@ -29,9 +39,6 @@ namespace SaveUp.ViewModels
             {
                 if (selectedItem != value)
                 {
-                    //selectedItem = value;
-                    //OnPropertyChanged(nameof(SelectedItem));
-                    // TODO: open detail
                     var homeDetail = App.ServiceProvider.GetService<HomeDetailsPage>()!;
                     homeDetail.Title = value.Name;
 
@@ -64,11 +71,20 @@ namespace SaveUp.ViewModels
             SettingsManager.PropertyChanged += async (s, e) => await SettingsManager_PropertyChanged(s, e);
         }
 
+        /// <summary>
+        /// Dispose the view model
+        /// </summary>
         public void Dispose()
         {
             SettingsManager.PropertyChanged -= async (s, e) => await SettingsManager_PropertyChanged(s, e);
         }
 
+        /// <summary>
+        /// Subscribe to the property changed event of the settings manager to reflect changes in the currency and reload the items on time span change
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private async Task SettingsManager_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(SettingsManager.TimeSpan))
@@ -80,6 +96,10 @@ namespace SaveUp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Clear the items and reload them also calculate the total amount
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadItems()
         {
             var res = await _itemAPIService.GetAllByUserIdAndTimeSpanAsync(AuthManager.UserId!, SettingsManager.TimeSpan);

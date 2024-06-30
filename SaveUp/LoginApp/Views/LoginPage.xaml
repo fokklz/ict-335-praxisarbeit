@@ -47,7 +47,7 @@
                     Style="{StaticResource LinkLabelStyleDisabled}"
                     Margin="3,0">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GotoPasswordReset}" />
+                            <TapGestureRecognizer Command="{Binding GotoPasswordResetCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
                 </VerticalStackLayout>
@@ -65,7 +65,7 @@
                     Style="{StaticResource LinkLabelStyle}"
                     Padding="0,6,0,0">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GotoRegister}" />
+                            <TapGestureRecognizer Command="{Binding GotoRegisterCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
                 </VerticalStackLayout>

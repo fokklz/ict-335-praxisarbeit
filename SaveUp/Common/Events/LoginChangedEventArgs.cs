@@ -1,5 +1,8 @@
 ﻿namespace SaveUp.Common.Events
 {
+    /// <summary>
+    /// Event arguments for the login changed event
+    /// </summary>
     public class LoginChangedEventArgs : EventArgs
     {
         public bool IsLoggedIn { get; set; }

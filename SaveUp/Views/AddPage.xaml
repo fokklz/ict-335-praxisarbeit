@@ -10,10 +10,13 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- Title -->
         <Label Text="{Binding Source={StaticResource Localization}, Path=Add_Title}" 
                 Style="{StaticResource Title}" />
 
+        <!-- Add Form -->
         <VerticalStackLayout Padding="0,20" Grid.Row="1">
+            <!-- Product -->
             <VerticalStackLayout Style="{StaticResource InputGroup}" >
                 <Label 
                     Text="{Binding Source={StaticResource Localization}, Path=Form_Product}"
@@ -26,6 +29,7 @@
                 </Frame>
             </VerticalStackLayout>
 
+            <!-- Price -->
             <VerticalStackLayout Style="{StaticResource InputGroup}" >
                 <Label 
                     Text="{Binding Source={StaticResource Localization}, Path=Form_Price}"
@@ -52,6 +56,7 @@
                 </Grid>
             </VerticalStackLayout>
 
+            <!-- Description -->
             <VerticalStackLayout Style="{StaticResource InputGroup}" >
                 <Label 
                     Text="{Binding Source={StaticResource Localization}, Path=Form_Description}"
@@ -67,7 +72,7 @@
             </VerticalStackLayout>
         </VerticalStackLayout>
 
-
+        <!-- Buttons -->
         <VerticalStackLayout Grid.Row="2" Spacing="15" Padding="0, 15">
             <Button 
                 Text="{Binding Source={StaticResource Localization}, Path=Form_Clear}"

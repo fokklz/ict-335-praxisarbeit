@@ -6,6 +6,9 @@ public partial class TimeSpanDisplay : ContentView
 {
     private Timer _updateTimer;
 
+    /// <summary>
+    /// The time span to display
+    /// </summary>
     public string TimeSpan { get; set; }
 
 	public TimeSpanDisplay()
@@ -19,6 +22,11 @@ public partial class TimeSpanDisplay : ContentView
         SettingsManager.PropertyChanged += SettingsManager_PropertyChanged;
     }
 
+    /// <summary>
+    /// Listener for the settings manager property changed event
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void SettingsManager_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(SettingsManager.TimeSpan))
@@ -30,11 +38,18 @@ public partial class TimeSpanDisplay : ContentView
         }
     }
 
+    /// <summary>
+    /// Callback for the update timer
+    /// </summary>
+    /// <param name="state">Current state</param>
     private void UpdateCallback(object state)
     {
         UpdateTimeSpan();
     }
 
+    /// <summary>
+    /// Update the time span label and set a appropriate update interval
+    /// </summary>
     private void UpdateTimeSpan()
     {
         MainThread.BeginInvokeOnMainThread(() =>

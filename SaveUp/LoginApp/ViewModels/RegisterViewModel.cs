@@ -13,21 +13,45 @@ namespace SaveUp.LoginApp.ViewModels
         private readonly IUserAPIService _userAPIService;
         private readonly IStorageService _storageService;
 
+        /// <summary>
+        /// The username of the user
+        /// </summary>
         public string Username { get; set; } = string.Empty;
 
+        /// <summary>
+        /// The email of the user
+        /// </summary>
         public string Email { get; set; } = string.Empty;
 
+        /// <summary>
+        /// The password of the user
+        /// </summary>
         public string Password { get; set; } = string.Empty;
 
+        /// <summary>
+        /// The password confirmation of the user
+        /// </summary>
         [OnChangedMethod(nameof(OnConfirmPasswordChange))]
         public string ConfirmPassword { get; set; } = string.Empty;
 
+        /// <summary>
+        /// If the password confirmation is valid
+        /// </summary>
         public bool ValidConfirmPassword { get; set; } = false;
 
+        /// <summary>
+        /// If the registration was successful
+        /// </summary>
         public bool IsSuccess { get; set; } = false;
 
+        /// <summary>
+        /// Navigate to the login page
+        /// </summary>
         public Command GotoLoginCommand { get; }
 
+        /// <summary>
+        /// Command to register the user
+        /// </summary>
         public Command RegisterCommand { get; }
 
         public RegisterViewModel(IAuthService authService, IAlertService alertService, IUserAPIService userAPIService, IStorageService storageService)
@@ -44,6 +68,9 @@ namespace SaveUp.LoginApp.ViewModels
 
         }
 
+        /// <summary>
+        /// Reset the state of the register view model
+        /// </summary>
         public void ResetRegisterState()
         {
             IsSuccess = false;
@@ -53,6 +80,9 @@ namespace SaveUp.LoginApp.ViewModels
             Email = string.Empty;
         }
 
+        /// <summary>
+        /// On change handler for the confirm password field
+        /// </summary>
         public async void OnConfirmPasswordChange()
         {
             if (Password != ConfirmPassword && Password.Length <= ConfirmPassword.Length)
@@ -67,9 +97,12 @@ namespace SaveUp.LoginApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Register the user with the given data
+        /// </summary>
+        /// <returns></returns>
         public async Task Register()
         {
-            Debug.WriteLine($"Registering user {Username} with email {Email} - {ValidConfirmPassword}");
             if (!ValidConfirmPassword)
             {
                 OnConfirmPasswordChange();

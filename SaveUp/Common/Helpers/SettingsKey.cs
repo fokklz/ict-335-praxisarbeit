@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SaveUp.Common.Helpers
+﻿namespace SaveUp.Common.Helpers
 {
     /// <summary>
     /// Helper class to get the settings keys (maybe enum would be better)

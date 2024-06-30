@@ -32,8 +32,8 @@ namespace SaveUp.Tests.LoginApp.ViewModels
         public void LoginViewModel_InitializesCorrectly()
         {
             Assert.NotNull(_viewModel.LoginCommand);
-            Assert.NotNull(_viewModel.GotoRegister);
-            Assert.NotNull(_viewModel.GotoPasswordReset);
+            Assert.NotNull(_viewModel.GotoRegisterCommand);
+            Assert.NotNull(_viewModel.GotoPasswordResetCommand);
             Assert.False(_viewModel.IsSuccess);
         }
 
@@ -77,7 +77,7 @@ namespace SaveUp.Tests.LoginApp.ViewModels
         [Fact]
         public async Task GotoRegister_NavigatesToRegister()
         {
-            _viewModel.GotoRegister.Execute(null);
+            _viewModel.GotoRegisterCommand.Execute(null);
 
             // Assuming Shell.Current.GoToAsync is handled within your navigation service
             // Here we just ensure the command gets called
@@ -88,7 +88,7 @@ namespace SaveUp.Tests.LoginApp.ViewModels
         {
             _viewModel.Soon = 1;
 
-            _viewModel.GotoPasswordReset.Execute(null);
+            _viewModel.GotoPasswordResetCommand.Execute(null);
 
             _alertServiceMock.Verify(a => a.ShowAsync("Coming Soon", "This feature is coming soon!"), Times.Once);
         }

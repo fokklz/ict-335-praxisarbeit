@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Reflection;
-using SystemTextJsonPatch;
+﻿using System.Reflection;
 
 namespace SaveUp.Common.Helpers
 {
@@ -24,24 +22,6 @@ namespace SaveUp.Common.Helpers
             {
                 string licenseKey = reader.ReadToEnd();
                 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licenseKey);
-            }
-        }
-
-        /// <summary>
-        /// Get a language resource by key
-        /// </summary>
-        /// <param name="key">The key to extract</param>
-        /// <param name="culture">The target Language</param>
-        /// <returns>The defined translation for the UI</returns>
-        public static string GetLanguageResource(string key, CultureInfo culture)
-        {
-            try
-            {
-                return Resources.Strings.Strings.ResourceManager.GetString(key, culture) ?? $"!{key}";
-            }
-            catch (Exception)
-            {
-                return $"!{key}";
             }
         }
 

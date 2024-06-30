@@ -14,27 +14,60 @@ namespace SaveUp.LoginApp.ViewModels
 
         private readonly IAlertService _alertService;
 
+        /// <summary>
+        /// If the email entry should be shown
+        /// </summary>
         public bool ShowEmailEntry { get; set; } = false;
 
+        /// <summary>
+        /// If the code entry should be shown
+        /// </summary>
         public bool ShowCodeEntry { get; set; } = false;
     
+        /// <summary>
+        /// If current step is email
+        /// </summary>
         public bool IsEmailStepVisible { get; set; } = true;
 
+        /// <summary>
+        /// If code was validated
+        /// </summary>
         public bool CodeValidated { get; set; } = false;
 
+        /// <summary>
+        /// The email of the user
+        /// </summary>
         public string Email { get; set; } = string.Empty;
 
+        /// <summary>
+        /// The code to reset the password
+        /// </summary>
         public string Code { get; set; } = string.Empty;
 
+        /// <summary>
+        /// The new password of the user
+        /// </summary>
         public string Password { get; set; } = string.Empty;
 
+        /// <summary>
+        /// The confirmation password of the user
+        /// </summary>
         public string ConfirmPassword { get; set; } = string.Empty;
 
-        public Command SubmitEmail { get; } 
+        /// <summary>
+        /// Command to submit the email
+        /// </summary>
+        public Command SubmitEmailCommand { get; } 
 
-        public Command SubmitCode { get; }
+        /// <summary>
+        /// Command to submit the code
+        /// </summary>
+        public Command SubmitCodeCommand { get; }
 
-        public Command SubmitPassword { get; }
+        /// <summary>
+        /// Command to submit the password
+        /// </summary>
+        public Command SubmitPasswordCommand { get; }
 
         public Command GotoLogin { get; } = new Command(() => {
             Shell.Current.GoToAsync("//Login");
@@ -42,9 +75,9 @@ namespace SaveUp.LoginApp.ViewModels
 
         public PasswordResetViewModel(IAlertService alertService) { 
             _alertService = alertService;
-            SubmitEmail = new Command(OnEmailSubmit);
-            SubmitCode = new Command(OnCodeSubmit);
-            SubmitPassword = new Command(OnPasswordSubmit);
+            SubmitEmailCommand = new Command(OnEmailSubmit);
+            SubmitCodeCommand = new Command(OnCodeSubmit);
+            SubmitPasswordCommand = new Command(OnPasswordSubmit);
         }
 
         private void OnEmailSubmit()

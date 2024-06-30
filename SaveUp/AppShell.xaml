@@ -15,7 +15,7 @@
         </Tab>
 
 
-        <!-- Tab for the RecentPage -->
+        <!-- Tab for the AddPage -->
         <Tab Title="Add" Icon="icon_add.png" >
             <ShellContent ContentTemplate="{DataTemplate views:AddPage}" />
         </Tab>

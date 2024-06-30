@@ -12,15 +12,34 @@ namespace SaveUp.ViewModels
         private readonly IAlertService _alertService;
         private readonly IItemAPIService _itemAPIService;
 
+        /// <summary>
+        /// Currency to use
+        /// </summary>
         public string Currency { get; set; } = SettingsManager.Currency;
 
+        /// <summary>
+        /// The name of the product to add
+        /// </summary>
         public string Product { get; set; }
 
+        /// <summary>
+        /// The price of the product to add
+        /// </summary>
         public string Price { get; set; }
 
+        /// <summary>
+        /// The description of the product to add
+        /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// The command to clear the fields
+        /// </summary>
         public Command ClearCommand { get; }
+
+        /// <summary>
+        /// The command to add the item
+        /// </summary>
         public Command AddCommand { get; }
 
         public AddViewModel(IAlertService alertService,IItemAPIService itemAPIService)
@@ -34,11 +53,19 @@ namespace SaveUp.ViewModels
             SettingsManager.PropertyChanged += SettingsManager_PropertyChanged;
         }
 
+        /// <summary>
+        /// Dispose the view model
+        /// </summary>
         public void Dispose()
         {
             SettingsManager.PropertyChanged -= SettingsManager_PropertyChanged;
         }
 
+        /// <summary>
+        /// Subscribe to the property changed event of the settings manager to reflect changes in the currency
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SettingsManager_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(SettingsManager.Currency))
@@ -47,6 +74,9 @@ namespace SaveUp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Reset the fields
+        /// </summary>
         public void Reset()
         {
             Product = string.Empty;
@@ -54,6 +84,10 @@ namespace SaveUp.ViewModels
             Description = string.Empty;
         }
 
+        /// <summary>
+        /// Add the item to the backend
+        /// </summary>
+        /// <returns></returns>
         public async Task Add()
         {
             var price = 0;

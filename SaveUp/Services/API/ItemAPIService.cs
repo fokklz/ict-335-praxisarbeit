@@ -13,6 +13,12 @@ namespace SaveUp.Services.API
         {
         }
 
+        /// <summary>
+        /// Get all items by user id and time span
+        /// </summary>
+        /// <param name="userId">The user id</param>
+        /// <param name="timeSpan">The time span</param>
+        /// <returns>The response wrapped in a HTTPResponse</returns>
         public async Task<HTTPResponse<List<ItemResponse>>> GetAllByUserIdAndTimeSpanAsync(string userId, DateTime timeSpan)
         {
             var res = await _sendRequest(HttpMethod.Get, _url("user", userId.ToString(), timeSpan.ToString("dd-MM-yyyy.HH-mm-ss")));

@@ -9,6 +9,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- Item Details -->
         <VerticalStackLayout>
             <HorizontalStackLayout>
                 <Label 
@@ -23,7 +24,7 @@
             <Label Text="{Binding Description}" Padding="0,18,0,0" />
         </VerticalStackLayout>
 
-
+        <!-- Actions -->
         <VerticalStackLayout Grid.Row="2" Spacing="15" Padding="0, 15">
             <Button 
                 Text="{Binding Source={StaticResource Localization}, Path=Home_Details_Remove}"

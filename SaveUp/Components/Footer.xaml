@@ -5,6 +5,7 @@
              HorizontalOptions="Center"
              VerticalOptions="End">
     <HorizontalStackLayout Padding="0,0,0,10">
+        <!-- Imprint -->
         <Label 
             Text="{Binding Source={StaticResource Localization}, Path=App_Imprint}"
             Style="{StaticResource LinkLabelStyle}" >
@@ -13,9 +14,11 @@
                     Command="{Binding GotoImprintCommand}" />
             </Label.GestureRecognizers>
         </Label>
+        <!-- Divider -->
         <Label
             Text="•"
             Padding="10,0"/>
+        <!-- Privacy Policy -->
         <Label 
             Text="{Binding Source={StaticResource Localization}, Path=App_PrivacyPolicy}"
             Style="{StaticResource LinkLabelStyle}">

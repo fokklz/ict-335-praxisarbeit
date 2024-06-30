@@ -16,6 +16,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
+            <!-- App Title and Timespan -->
             <StackLayout>
                 <Label Text="{Binding Source={StaticResource Localization}, Path=App_Title}" 
                     Style="{StaticResource Title}" />
@@ -26,6 +27,7 @@
                 </HorizontalStackLayout>
             </StackLayout>
 
+            <!-- Total Amount and Currency -->
             <StackLayout Grid.Column="1">
                 <Label Text="{Binding TotalAmount}" 
                     Style="{StaticResource Title}"
@@ -36,8 +38,10 @@
             </StackLayout>
         </Grid>
         
+        <!-- Bottom Border -->
         <BoxView Style="{StaticResource HeaderBorder}" Grid.Row="1" />
         
+        <!-- Items List -->
         <ListView
             x:Name="ItemsListView"
             ItemsSource="{Binding Items}"
@@ -87,6 +91,7 @@
                                 
                             </HorizontalStackLayout>
 
+                            <!-- Description -->
                             <Label 
                                 Grid.Row="1"
                                 Grid.Column="0"
@@ -96,6 +101,7 @@
                                 VerticalOptions="Center"
                                 HorizontalOptions="FillAndExpand" />
 
+                            <!-- Created At -->
                             <Label
                                 Grid.Row="1"
                                 Grid.Column="1"

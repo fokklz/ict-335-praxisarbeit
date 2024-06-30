@@ -11,7 +11,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- Settings Form -->
         <StackLayout Grid.Row="0" WidthRequest="350" HorizontalOptions="StartAndExpand">
+            <!-- Currency -->
             <Grid Padding="0,8" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="43"/>
@@ -28,6 +30,8 @@
                     </VerticalStackLayout>
                 </Frame>
             </Grid>
+            
+            <!-- Theme -->
             <Grid Padding="0,8" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="43"/>
@@ -48,6 +52,7 @@
                 </Frame>
             </Grid>
 
+            <!-- Language -->
             <Grid Padding="0,8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="43"/>
@@ -68,6 +73,7 @@
             </Grid>
         </StackLayout>
 
+        <!-- Time Span -->
         <Label 
             Grid.Row="1"
             Text="{Binding Source={StaticResource Localization}, Path=App_Time, StringFormat='{0}:'}"
@@ -76,6 +82,7 @@
             Grid.Row="1" 
             HorizontalOptions="End"  />
 
+        <!-- Actions -->
         <VerticalStackLayout Grid.Row="3" Spacing="15" Padding="0, 10">
             <Button 
                 Text="{Binding Source={StaticResource Localization}, Path=Settings_Button_Timespan}"
